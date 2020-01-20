@@ -1,5 +1,6 @@
 package com.coviam.team3bookstorebackend.merchantMS.service.serviceimpl;
 
+import com.coviam.team3bookstorebackend.merchantMS.dto.RemoveProductDTO;
 import com.coviam.team3bookstorebackend.merchantMS.entity.ProductMerchant;
 import com.coviam.team3bookstorebackend.merchantMS.repositery.ProductMerchantRepositery;
 import com.coviam.team3bookstorebackend.merchantMS.service.ProductMerchantService;
@@ -32,5 +33,13 @@ public class ProductMerchantServiceImpl implements ProductMerchantService
     @Override
     public List<ProductMerchant> findAll() {
         return (ArrayList<ProductMerchant>)productMerchantRepositery.findAll();
+    }
+
+
+    @Override
+    public List<ProductMerchant> removeProduct(RemoveProductDTO removeProductDTO) {
+        productMerchantRepositery.deleteById(removeProductDTO.getProduct_id());
+        ArrayList<String> productMerchants=new ArrayList<String>(Arrays.asList(removeProductDTO.getMerchant_id()));
+        return (List<ProductMerchant>) productMerchantRepositery.findAllById(productMerchants);
     }
 }

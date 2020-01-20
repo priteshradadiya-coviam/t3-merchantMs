@@ -4,6 +4,7 @@ package com.coviam.team3bookstorebackend.merchantMS.controller;
 import com.coviam.team3bookstorebackend.merchantMS.dto.MerchantDTO;
 import com.coviam.team3bookstorebackend.merchantMS.dto.MerchantRatingDTO;
 import com.coviam.team3bookstorebackend.merchantMS.dto.ProductMerchantDTO;
+import com.coviam.team3bookstorebackend.merchantMS.dto.RemoveProductDTO;
 import com.coviam.team3bookstorebackend.merchantMS.entity.Merchant;
 import com.coviam.team3bookstorebackend.merchantMS.entity.ProductMerchant;
 import com.coviam.team3bookstorebackend.merchantMS.repositery.MerchantRepositery;
@@ -44,7 +45,7 @@ public class MerchantController
     }
 
     @PostMapping(value = "/addProductQuantity")
-    public List<ProductMerchant> addProductQuantity(@RequestBody ProductMerchantDTO productMerchantDTO)
+    public List<ProductMerchant> addOrUpdateProductQuantity(@RequestBody ProductMerchantDTO productMerchantDTO)
     {
         ProductMerchant productMerchant=new ProductMerchant();
         BeanUtils.copyProperties(productMerchantDTO,productMerchant);
@@ -52,13 +53,13 @@ public class MerchantController
         //return new ResponseEntity<ProductMerchant>(productMerchantCreated,HttpStatus.CREATED);
     }
 
-    @GetMapping(value="/getMerchant/{Id}")
-    public Merchant getMerchantById(@PathVariable("Id") String merchant_id)
-    {
-        Optional<Merchant> optionalCustomer=merchantService.getMerchant(merchant_id);
-        Merchant merchant=optionalCustomer.get();
-        return  merchant;
-    }
+//    @GetMapping(value="/getMerchant/{Id}")
+//    public Merchant getMerchantById(@PathVariable("Id") String merchant_id)
+//    {
+//        Optional<Merchant> optionalCustomer=merchantService.getMerchant(merchant_id);
+//        Merchant merchant=optionalCustomer.get();
+//        return  merchant;
+//    }
 
     @PostMapping(value = "/addMerchantRating")
     public String addRating(@RequestBody MerchantRatingDTO merchantRatingDTO)
@@ -74,6 +75,11 @@ public class MerchantController
         return productMerchantService.findAll();
     }
 
+    @PostMapping("/removeProduct")
+    public List<ProductMerchant> removeProduct(@RequestBody RemoveProductDTO removeProductDTO)
+    {
+        return productMerchantService.removeProduct(removeProductDTO);
+    }
 
 
    // @PostMapping(value = "/addProductRating")
