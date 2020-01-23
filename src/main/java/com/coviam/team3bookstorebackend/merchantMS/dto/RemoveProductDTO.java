@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class RemoveProductDTO
 {
-    private String product_id;
-    private String merchant_id;
+    private String productId;
+    private String merchantId;
 
 }

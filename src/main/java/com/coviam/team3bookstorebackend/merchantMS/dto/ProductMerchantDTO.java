@@ -11,8 +11,8 @@ import javax.persistence.Id;
 public class ProductMerchantDTO
 {
 
-    String Product_id;
-    String merchant_id;
+    String productId;
+    String merchantId;
     String price;
     String quantity;
 
